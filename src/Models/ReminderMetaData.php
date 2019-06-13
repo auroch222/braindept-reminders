@@ -16,4 +16,14 @@ class ReminderMetaData extends Model
         'key_id',
         'value',
     ];
+
+    public function reminder()
+    {
+        return $this->hasOne('Braindept\Reminder\Models\Reminder', 'id', 'reminder_id');
+    }
+
+    public function key()
+    {
+        return $this->hasOne('Braindept\Reminder\Models\ReminderMetaDataKeys', 'id', 'key_id');
+    }
 }

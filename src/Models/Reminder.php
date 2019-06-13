@@ -18,4 +18,14 @@ class Reminder extends Model
         'note',
         'reminder_type_id',
     ];
+
+    public function type()
+    {
+        return $this->hasOne('Braindept\Reminder\Models\ReminderType', 'id', 'reminder_type_id');
+    }
+
+    public function metas()
+    {
+        return $this->hasMany('Braindept\Reminder\Models\ReminderMetaData', 'reminder_id');
+    }
 }
