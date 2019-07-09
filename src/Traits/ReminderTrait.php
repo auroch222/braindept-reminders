@@ -5,6 +5,7 @@ namespace Braindept\Reminder\Traits;
 
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 trait ReminderTrait
 {
@@ -15,10 +16,10 @@ trait ReminderTrait
      * @param string $reminderDate
      * @param string $note
      * @param int $reminderType
-     * @param int|null $userId
+     * @param int $userId
      * @return mixed
      */
-    public function createReminder(int $sourceId, string $reminderDate, string $note, int $reminderType, ?int $userId)
+    public function createReminder(int $sourceId, string $reminderDate, string $note, int $reminderType, int $userId)
     {
         $reminderRepository = resolve('Braindept\Reminder\Repositories\ReminderRepositoryInterface');
         $sourceType = $this->getCalledModelName();
@@ -35,9 +36,24 @@ trait ReminderTrait
         return $reminderRepository->create($data);
     }
 
-    public function deactivateReminder(int $id)
+    /**
+     * @param int $id
+     * @param int $userId
+     */
+    public function deactivateReminder(int $id, int $userId)
     {
+        DB::transaction(function () use ($id, $userId) {
+            $reminderRepository = resolve('Braindept\Reminder\Repositories\ReminderRepositoryInterface');
+            $reminderMetaDataRepository = resolve('Braindept\Reminder\Repositories\ReminderMetaDataRepositoryInterface');
 
+            $reminderRepository->delete($id);
+            $reminderMetaDataRepository->create([
+                'reminder_id' => $id,
+                'key_id' => config('reminder.reminder_meta_data_keys.deactivator_user'),
+                'value' => $userId,
+            ]);
+
+        }, 1);
     }
 
     /**

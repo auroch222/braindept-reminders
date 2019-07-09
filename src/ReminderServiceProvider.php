@@ -6,17 +6,22 @@ use Illuminate\Support\ServiceProvider;
 // Repos
 use Braindept\Reminder\Repositories\ReminderRepositoryInterface;
 use Braindept\Reminder\Repositories\ReminderRepository;
+use Braindept\Reminder\Repositories\ReminderMetaDataRepositoryInterface;
+use Braindept\Reminder\Repositories\ReminderMetaDataRepository;
 // Commands
 use Braindept\Reminder\Console\InsertReminderTypes;
+use Braindept\Reminder\Console\ReminderMetaDataKeysSeeder;
 
 class ReminderServiceProvider extends ServiceProvider
 {
     private const REPOSITORIES = [
         ReminderRepositoryInterface::class => ReminderRepository::class,
+        ReminderMetaDataRepositoryInterface::class => ReminderMetaDataRepository::class,
     ];
 
     protected $commands = [
         InsertReminderTypes::class,
+        ReminderMetaDataKeysSeeder::class,
     ];
 
     public function boot()
