@@ -30,6 +30,7 @@ class ReminderDeactivator extends Command
      * Create a new command instance.
      *
      * @param ReminderRepositoryInterface $reminderRepo
+     * @param ReminderMetaDataRepositoryInterface $reminderMetaDataRepo
      */
     public function __construct(
         ReminderRepositoryInterface $reminderRepo,
