@@ -39,7 +39,7 @@ class ReminderMetaDataKeysSeeder extends Command
     public function handle()
     {
         $defaultMetaKeys = [
-            'DEACTIVATOR_USER'
+            'DEACTIVATOR_USER',
         ];
 
         if ($this->option('key') != null) {

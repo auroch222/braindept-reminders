@@ -11,6 +11,7 @@ use Braindept\Reminder\Repositories\ReminderMetaDataRepository;
 // Commands
 use Braindept\Reminder\Console\InsertReminderTypes;
 use Braindept\Reminder\Console\ReminderMetaDataKeysSeeder;
+use Braindept\Reminder\Console\ReminderDeactivator;
 
 class ReminderServiceProvider extends ServiceProvider
 {
@@ -22,6 +23,7 @@ class ReminderServiceProvider extends ServiceProvider
     protected $commands = [
         InsertReminderTypes::class,
         ReminderMetaDataKeysSeeder::class,
+        ReminderDeactivator::class,
     ];
 
     public function boot()

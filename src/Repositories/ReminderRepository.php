@@ -4,6 +4,7 @@
 namespace Braindept\Reminder\Repositories;
 
 use Braindept\Reminder\Models\Reminder;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 
 class ReminderRepository implements ReminderRepositoryInterface
@@ -69,7 +70,20 @@ class ReminderRepository implements ReminderRepositoryInterface
      */
     public function getRemindersByTypeAndSourceId(string $sourceType, int $sourceId): Collection
     {
-        $reminders = Reminder::where('source_type', $sourceType)->where('source_id', $sourceId)->get();
+        $reminders = Reminder::where('source_type', strtoupper($sourceType))->where('source_id', $sourceId)->get();
+
+        return $reminders;
+    }
+
+    /**
+     * @param string $sourceType
+     * @param int $daysRange
+     * @return Reminder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder
+     */
+    public function getRemindersByTypeAndDayRange(string $sourceType, int $daysRange)
+    {
+        $reminders = Reminder::withTrashed()->where('source_type', strtoupper($sourceType))
+            ->whereBetween('reminder_date', [Carbon::now()->subDays($daysRange), Carbon::now()->today()]);
 
         return $reminders;
     }

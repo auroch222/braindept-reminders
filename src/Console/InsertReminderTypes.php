@@ -13,7 +13,7 @@ class InsertReminderTypes extends Command
      *
      * @var string
      */
-    protected $signature = 'insert:reminder-types {--type=}';
+    protected $signature = 'reminder:insert-reminder-types {--type=}';
 
     /**
      * The console command description.
