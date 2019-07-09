@@ -57,6 +57,18 @@ trait ReminderTrait
     }
 
     /**
+     * @param int $id
+     * @return mixed
+     */
+    public function getReminders(int $id)
+    {
+        $reminderRepository = resolve('Braindept\Reminder\Repositories\ReminderRepositoryInterface');
+        $sourceType = $this->getCalledModelName();
+
+        return $reminderRepository->getRemindersByTypeAndSourceId($sourceType, $id);
+    }
+
+    /**
      * @return string
      */
     public function getCalledModelName(): string
