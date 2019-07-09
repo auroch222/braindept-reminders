@@ -22,6 +22,8 @@ class ReminderServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+        $this->mergeConfigFrom(__DIR__ . '/config/reminder.php', 'reminder');
+        $this->publishes([__DIR__ . '/config/reminder.php' => config_path('reminder.php')]);
     }
 
     public function register()

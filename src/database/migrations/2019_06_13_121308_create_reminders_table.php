@@ -23,6 +23,8 @@ class CreateRemindersTable extends Migration
             $table->unsignedBigInteger('reminder_type_id');
             $table->foreign('reminder_type_id')->references('id')->on('reminder_types');
 
+            $table->integer('user_id')->unsigned()->nullable();
+
             $table->timestamps();
             $table->softDeletes();
         });

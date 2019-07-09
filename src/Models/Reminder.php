@@ -17,6 +17,7 @@ class Reminder extends Model
         'source_type',
         'note',
         'reminder_type_id',
+        'user_id',
     ];
 
     public function type()
