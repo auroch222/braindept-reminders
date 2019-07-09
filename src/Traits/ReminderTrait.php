@@ -52,7 +52,6 @@ trait ReminderTrait
                 'key_id' => config('reminder.reminder_meta_data_keys.deactivator_user'),
                 'value' => $userId,
             ]);
-
         }, 1);
     }
 
@@ -65,7 +64,7 @@ trait ReminderTrait
         $reminderRepository = resolve('Braindept\Reminder\Repositories\ReminderRepositoryInterface');
         $sourceType = $this->getCalledModelName();
 
-        return $reminderRepository->getRemindersByTypeAndSourceId($sourceType, $id);
+        return $reminderRepository->getByTypeAndSourceId($sourceType, $id);
     }
 
     /**

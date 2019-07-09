@@ -52,7 +52,7 @@ class ReminderDeactivator extends Command
         $deactivatorType = $this->argument('type');
         $daysRange = $this->argument('days-range');
 
-        $this->reminderRepo->getRemindersByTypeAndDayRange($deactivatorType, $daysRange)
+        $this->reminderRepo->getByTypeAndDayRange($deactivatorType, $daysRange)
             ->chunk(500, function ($reminders) {
                 foreach ($reminders as $reminder) {
                     try {
@@ -63,7 +63,7 @@ class ReminderDeactivator extends Command
                                 'key_id' => config('reminder.reminder_meta_data_keys.deactivator_user'),
                                 'value' => 1,
                             ]);
-                        }, 1);
+                        });
                     } catch (\Exception $e) {
                         \Log::info(
                             'REMINDER_DEACTIVATOR_ERROR',

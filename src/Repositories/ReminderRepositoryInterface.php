@@ -61,7 +61,7 @@ interface ReminderRepositoryInterface
      * @param int $sourceId
      * @return Collection
      */
-    public function getRemindersByTypeAndSourceId(string $sourceType, int $sourceId): Collection;
+    public function getByTypeAndSourceId(string $sourceType, int $sourceId): Collection;
 
 
     /**
@@ -69,5 +69,5 @@ interface ReminderRepositoryInterface
      * @param int $daysRange
      * @return mixed
      */
-    public function getRemindersByTypeAndDayRange(string $sourceType, int $daysRange);
+    public function getByTypeAndDayRange(string $sourceType, int $daysRange);
 }

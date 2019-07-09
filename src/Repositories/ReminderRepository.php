@@ -68,7 +68,7 @@ class ReminderRepository implements ReminderRepositoryInterface
      * @param int $sourceId
      * @return Collection
      */
-    public function getRemindersByTypeAndSourceId(string $sourceType, int $sourceId): Collection
+    public function getByTypeAndSourceId(string $sourceType, int $sourceId): Collection
     {
         $reminders = Reminder::where('source_type', strtoupper($sourceType))->where('source_id', $sourceId)->get();
 
@@ -80,7 +80,7 @@ class ReminderRepository implements ReminderRepositoryInterface
      * @param int $daysRange
      * @return Reminder|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder
      */
-    public function getRemindersByTypeAndDayRange(string $sourceType, int $daysRange)
+    public function getByTypeAndDayRange(string $sourceType, int $daysRange)
     {
         $reminders = Reminder::withTrashed()->where('source_type', strtoupper($sourceType))
             ->whereBetween('reminder_date', [Carbon::now()->subDays($daysRange), Carbon::now()->today()]);
