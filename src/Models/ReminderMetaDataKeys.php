@@ -12,6 +12,7 @@ class ReminderMetaDataKeys extends Model
     protected $table = 'reminder_meta_data_keys';
 
     public $fillable = [
-        'name'
+        'name',
+        'key',
     ];
 }

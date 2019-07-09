@@ -16,6 +16,7 @@ class CreateReminderTypesTable extends Migration
         Schema::create('reminder_types', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->string('key');
             $table->timestamps();
             $table->softDeletes();
         });

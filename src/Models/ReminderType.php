@@ -12,6 +12,7 @@ class ReminderType extends Model
     protected $table = 'reminder_types';
 
     public $fillable = [
-      'name'
+        'name',
+        'key',
     ];
 }
