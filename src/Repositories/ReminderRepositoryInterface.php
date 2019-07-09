@@ -37,6 +37,15 @@ interface ReminderRepositoryInterface
 
 
     /**
+     * Create Reminder
+     *
+     * @param array $data
+     * @return Reminder
+     */
+    public function create(array $data): Reminder;
+
+
+    /**
      * Updates a reminder.
      *
      * @param int
@@ -44,7 +53,6 @@ interface ReminderRepositoryInterface
      * @return Reminder
      */
     public function update(int $reminderId, array $data): Reminder;
-
 
     /**
      * Get reminders by source_type and source_id
