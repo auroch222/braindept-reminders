@@ -12,21 +12,20 @@ trait ReminderTrait
 
 
     /**
-     * @param int $sourceId
      * @param string $reminderDate
      * @param string $note
      * @param int $reminderType
      * @param int $userId
      * @return mixed
      */
-    public function createReminder(int $sourceId, string $reminderDate, string $note, int $reminderType, int $userId)
+    public function createReminder(string $reminderDate, string $note, int $reminderType, int $userId)
     {
         $reminderRepository = resolve('Braindept\Reminder\Repositories\ReminderRepositoryInterface');
         $sourceType = $this->getCalledModelName();
 
         $data = [
             'reminder_date' => Carbon::parse($reminderDate),
-            'source_id' => $sourceId,
+            'source_id' => $this->id,
             'source_type' => $sourceType,
             'note' => $note,
             'reminder_type_id' => $reminderType,
@@ -59,12 +58,15 @@ trait ReminderTrait
      * @param int $id
      * @return mixed
      */
-    public function getReminders(int $id)
+    public function getReminders()
     {
         $reminderRepository = resolve('Braindept\Reminder\Repositories\ReminderRepositoryInterface');
         $sourceType = $this->getCalledModelName();
 
-        return $reminderRepository->getByTypeAndSourceId($sourceType, $id);
+        return $reminderRepository->getByTypeAndSourceId(
+            $sourceType,
+            $this->id
+        );
     }
 
     /**
@@ -77,5 +79,4 @@ trait ReminderTrait
 
         return strtoupper(end($data));
     }
-
 }

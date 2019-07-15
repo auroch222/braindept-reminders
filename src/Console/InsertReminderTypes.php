@@ -40,8 +40,8 @@ class InsertReminderTypes extends Command
     public function handle()
     {
         $defaultTypes = [
-            'PTP',
-            'REMINDER',
+            'ptp',
+            'reminder',
         ];
 
         if ($this->option('type') != null) {
@@ -49,7 +49,10 @@ class InsertReminderTypes extends Command
         }
 
         foreach ($defaultTypes as $type) {
-            ReminderType::firstOrCreate(['name' => strtoupper($type)]);
+            ReminderType::firstOrCreate([
+                'name' => $type,
+                'key' => strtoupper($type),
+            ]);
         }
     }
 }
