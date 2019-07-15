@@ -73,5 +73,9 @@ interface ReminderRepositoryInterface
      */
     public function getByTypeAndDayRange(string $sourceType, int $daysRange);
 
+    /**
+     * @param $obj
+     * @return mixed
+     */
     public function getRelatedReminders($obj);
 }
