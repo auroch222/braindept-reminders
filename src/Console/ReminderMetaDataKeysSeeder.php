@@ -47,7 +47,10 @@ class ReminderMetaDataKeysSeeder extends Command
         }
 
         foreach ($defaultMetaKeys as $key) {
-            ReminderMetaDataKeys::firstOrCreate(['name' => strtoupper($key)]);
+            ReminderMetaDataKeys::firstOrCreate([
+                'name' => $key,
+                'key' => strtoupper($key),
+            ]);
         }
     }
 }
