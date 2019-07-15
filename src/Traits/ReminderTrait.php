@@ -6,7 +6,6 @@ namespace Braindept\Reminder\Traits;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Braindept\Reminder\Models\Reminder;
 
 trait ReminderTrait
@@ -76,18 +75,13 @@ trait ReminderTrait
      */
     public function getCalledModelName(): string
     {
-        $calledClass = get_called_class();
-        $data = explode('\\', $calledClass);
-
-        return strtoupper(end($data));
+        return get_called_class();
     }
 
-    public function relatedReminders(): MorphToMany
+    public function relatedReminders()
     {
-        return $this->morphToMany(
+        return $this->morphMany(
             Reminder::class,
-            'reminders',
-            'null',
             'source'
         );
     }
