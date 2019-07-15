@@ -37,18 +37,18 @@ trait ReminderTrait
     }
 
     /**
-     * @param int $id
+     * @param int $reminderId
      * @param int $userId
      */
-    public function deactivateReminder(int $userId)
+    public function deactivateReminder(int $reminderId, int $userId)
     {
-        DB::transaction(function () use ($userId) {
+        DB::transaction(function () use ($reminderId, $userId) {
             $reminderRepository = resolve('Braindept\Reminder\Repositories\ReminderRepositoryInterface');
             $reminderMetaDataRepository = resolve('Braindept\Reminder\Repositories\ReminderMetaDataRepositoryInterface');
 
-            $reminderRepository->delete($this->id);
+            $reminderRepository->delete($reminderId);
             $reminderMetaDataRepository->create([
-                'reminder_id' => $this->id,
+                'reminder_id' => $reminderId,
                 'key_id' => config('reminder.reminder_meta_data_keys.deactivator_user'),
                 'value' => $userId,
             ]);
