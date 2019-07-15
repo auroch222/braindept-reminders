@@ -6,6 +6,8 @@ namespace Braindept\Reminder\Traits;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Braindept\Reminder\Models\Reminder;
 
 trait ReminderTrait
 {
@@ -39,15 +41,15 @@ trait ReminderTrait
      * @param int $id
      * @param int $userId
      */
-    public function deactivateReminder(int $id, int $userId)
+    public function deactivateReminder(int $userId)
     {
-        DB::transaction(function () use ($id, $userId) {
+        DB::transaction(function () use ($userId) {
             $reminderRepository = resolve('Braindept\Reminder\Repositories\ReminderRepositoryInterface');
             $reminderMetaDataRepository = resolve('Braindept\Reminder\Repositories\ReminderMetaDataRepositoryInterface');
 
-            $reminderRepository->delete($id);
+            $reminderRepository->delete($this->id);
             $reminderMetaDataRepository->create([
-                'reminder_id' => $id,
+                'reminder_id' => $this->id,
                 'key_id' => config('reminder.reminder_meta_data_keys.deactivator_user'),
                 'value' => $userId,
             ]);
@@ -78,5 +80,15 @@ trait ReminderTrait
         $data = explode('\\', $calledClass);
 
         return strtoupper(end($data));
+    }
+
+    public function relatedReminders(): MorphToMany
+    {
+        return $this->morphToMany(
+            Reminder::class,
+            'reminders',
+            'null',
+            'source'
+        );
     }
 }
