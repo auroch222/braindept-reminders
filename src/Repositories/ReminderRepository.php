@@ -70,7 +70,12 @@ class ReminderRepository implements ReminderRepositoryInterface
      */
     public function getByTypeAndSourceId(string $sourceType, int $sourceId): Collection
     {
-        $reminders = Reminder::where('source_type', strtoupper($sourceType))->where('source_id', $sourceId)->get();
+        $reminders = Reminder::withTrashed()
+            ->where('source_type', $sourceType)
+            ->where('source_id', $sourceId)
+            ->orderBy('reminder_date', 'desc')
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return $reminders;
     }
