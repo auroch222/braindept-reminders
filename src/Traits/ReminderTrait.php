@@ -80,9 +80,8 @@ trait ReminderTrait
 
     public function relatedReminders()
     {
-        return $this->morphMany(
-            Reminder::class,
-            'source'
-        );
+        $reminderRepository = resolve('Braindept\Reminder\Repositories\ReminderRepositoryInterface');
+
+        return $reminderRepository->getRelatedReminders($this);
     }
 }

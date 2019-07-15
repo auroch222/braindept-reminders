@@ -6,6 +6,8 @@ namespace Braindept\Reminder\Repositories;
 
 use Braindept\Reminder\Models\Reminder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\morphMany;
+
 
 interface ReminderRepositoryInterface
 {
@@ -70,4 +72,6 @@ interface ReminderRepositoryInterface
      * @return mixed
      */
     public function getByTypeAndDayRange(string $sourceType, int $daysRange);
+
+    public function getRelatedReminders($obj);
 }

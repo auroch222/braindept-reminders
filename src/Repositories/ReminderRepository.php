@@ -87,4 +87,12 @@ class ReminderRepository implements ReminderRepositoryInterface
 
         return $reminders;
     }
+
+    public function getRelatedReminders($obj)
+    {
+        return $obj->morphMany(
+            Reminder::class,
+            'source'
+        );
+    }
 }
