@@ -6,6 +6,14 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateReminderMetaDataTable extends Migration
 {
+    public $type = "core";
+
+    /**
+     * Migration entity name
+     *
+     * @var string
+     */
+    public $entity = "";
     /**
      * Run the migrations.
      *
