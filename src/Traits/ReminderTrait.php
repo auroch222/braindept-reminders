@@ -78,6 +78,9 @@ trait ReminderTrait
         return get_called_class();
     }
 
+    /**
+     * @return mixed
+     */
     public function relatedReminders()
     {
         $reminderRepository = resolve('Braindept\Reminder\Repositories\ReminderRepositoryInterface');
