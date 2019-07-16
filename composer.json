@@ -2,8 +2,9 @@
     "name": "braindept/reminders",
     "description": "Reminders development",
     "type": "library",
-    "version": "0.0.1",
+    "version": "0.0.3",
     "license": "MIT",
+    "minimum-stability": "dev",
     "authors": [
         {
             "name": "auroch222",
@@ -14,6 +15,13 @@
     "autoload": {
         "psr-4": {
             "Braindept\\Reminder\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Braindept\\Reminder\\ReminderServiceProvider"
+            ]
         }
     }
 }
