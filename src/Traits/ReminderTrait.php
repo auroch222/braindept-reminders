@@ -6,7 +6,6 @@ namespace Braindept\Reminder\Traits;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-use Braindept\Reminder\Models\Reminder;
 
 trait ReminderTrait
 {
