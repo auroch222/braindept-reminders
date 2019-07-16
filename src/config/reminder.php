@@ -3,7 +3,8 @@
 return [
     'reminder_types' => [
         'ptp' => 1,
-        'reminder' => 2
+        'client_reminder' => 2,
+        'loan_reminder' => 3,
     ],
     'reminder_meta_data_keys' => [
         'deactivator_user' => 1,

@@ -41,7 +41,8 @@ class InsertReminderTypes extends Command
     {
         $defaultTypes = [
             'ptp',
-            'reminder',
+            'client_reminder',
+            'loan_reminder',
         ];
 
         if ($this->option('type') != null) {
