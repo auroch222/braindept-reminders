@@ -86,4 +86,16 @@ trait ReminderTrait
 
         return $reminderRepository->getRelatedReminders($this);
     }
+
+    /**
+     * @param string $sourceType
+     * @param int $daysRange
+     * @return mixed
+     */
+    public function getByTypeAndDayRange(string $sourceType, int $daysRange)
+    {
+        $reminderRepository = resolve('Braindept\Reminder\Repositories\ReminderRepositoryInterface');
+
+        return $reminderRepository->getByTypeAndDayRange($sourceType, $daysRange);
+    }
 }
