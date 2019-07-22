@@ -32,11 +32,12 @@ class ReminderRepository implements ReminderRepositoryInterface
      */
     public function delete(int $reminderId): bool
     {
-        if (Reminder::find($reminderId)->delete()) {
+        try {
+            Reminder::find($reminderId)->delete();
             return true;
+        } catch (\Exception $e) {
+            return false;
         }
-
-        return false;
     }
 
     /**
