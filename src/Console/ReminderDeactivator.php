@@ -49,7 +49,8 @@ class ReminderDeactivator extends Command
      */
     public function handle()
     {
-        $deactivatorType = $this->argument('type');
+        $deactivatorType = config('reminder.type_mapping_for_deactivation_cron.' . $this->argument('type'));
+
         $daysRange = $this->argument('days-range');
 
         $this->reminderRepo->getByTypeAndDayRange($deactivatorType, $daysRange)

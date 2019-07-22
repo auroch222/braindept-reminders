@@ -9,4 +9,7 @@ return [
     'reminder_meta_data_keys' => [
         'deactivator_user' => 1,
     ],
+    'type_mapping_for_deactivation_cron' => [
+
+    ],
 ];
