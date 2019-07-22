@@ -2,7 +2,7 @@
     "name": "braindept/reminders",
     "description": "Reminders development",
     "type": "library",
-    "version": "0.0.3",
+    "version": "v0.0.5",
     "license": "MIT",
     "minimum-stability": "dev",
     "authors": [
