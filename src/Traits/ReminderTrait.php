@@ -98,4 +98,42 @@ trait ReminderTrait
 
         return $reminderRepository->getByTypeAndDayRange($sourceType, $daysRange);
     }
+
+    /**
+     * @param int $reminderId
+     * @param int $keyId
+     * @param string $value
+     * @return mixed
+     */
+    public function createReminderMetaData(int $reminderId, int $keyId, string $value)
+    {
+        $reminderMetaDataRepository = resolve('Braindept\Reminder\Repositories\ReminderMetaDataRepositoryInterface');
+        return $reminderMetaDataRepository->create([
+            'reminder_id' => $reminderId,
+            'key_id' => $keyId,
+            'value' => $value
+        ]);
+    }
+
+    /**
+     * @param int $reminderId
+     * @param array $data
+     * @return bool
+     */
+    public function createReminderMassMetaData(int $reminderId, array $data)
+    {
+        $reminderMetaDataRepository = resolve('Braindept\Reminder\Repositories\ReminderMetaDataRepositoryInterface');
+
+        DB::transaction(function () use ($reminderId, $data, $reminderMetaDataRepository) {
+            foreach ($data as $rec) {
+                $reminderMetaDataRepository->create([
+                    'reminder_id' => $reminderId,
+                    'key_id' => data_get($rec, 'keyId'),
+                    'value' => data_get($rec, 'value')
+                ]);
+            }
+        }, 1);
+
+        return true;
+    }
 }
